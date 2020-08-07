@@ -31,9 +31,7 @@ define('CHI_PATH', dirname(__FILE__));
 $plugin = plugin_basename(__FILE__);
 define('CHI_URL', plugin_dir_url($plugin));
 
-// menu
 require CHI_PATH.'/inc/LoginRegister96.php';
-// require CHI_PATH.'/inc/class_woocommerce_order_page.php';
 require CHI_PATH.'/inc/login_register_menu.php';
 require CHI_PATH.'/inc/CHI_ajax.php';
 

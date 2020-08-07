@@ -4,7 +4,7 @@
 	var loginform_id96 = object96.loginregister96_login_cred.login_form_id96;
 	var uname_email_login96 = object96.loginregister96_login_cred.uname_email_login96;
 	var pwd_login96 = object96.loginregister96_login_cred.pwd_login96;
-	$("#"+loginform_id96).submit(function(event) {
+	$(loginform_id96).submit(function(event) {
     event.preventDefault();
 
     var validation = {rules:{}, messages:{}} // fill in normal rules if there are any.
@@ -99,7 +99,7 @@
                     } else {
                         Swal.fire({
                             icon: 'error',
-                            text: response.error,
+                            text: response.message,
                             });
                        // console.log(response);
                     }

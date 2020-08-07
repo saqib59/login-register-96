@@ -12,11 +12,10 @@ class LoginRegister96{
         
   }
   public function login_register96_scripts(){
-    wp_enqueue_script( 'main-script96', CHI_URL.'/assets/js/main-script.js', '', '', true );
-    wp_enqueue_script( 'waitmejs-96', CHI_URL.'/assets/js/waitme.js', '', '', true );
-    wp_enqueue_script( 'waitmecss-96', CHI_URL.'/assets/css/waitme.css');
+   wp_enqueue_script( 'sweet-alert', 'https://cdn.jsdelivr.net/npm/sweetalert2@9','','',true);
     wp_enqueue_script( 'jquery-validate', 'https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js','','',true);
-
+    wp_enqueue_script( 'main-script96', CHI_URL.'/assets/js/main-script.js', '', '', true );
+    
     $this->loginregister96_login['login_form_id96'] = get_option( 'login_form_id96' );
     $this->loginregister96_login['uname_email_login96'] = get_option( 'uname_email_login96' );
     $this->loginregister96_login['pwd_login96'] = get_option( 'pwd_login96' );

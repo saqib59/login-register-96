@@ -5,7 +5,7 @@ class ajax_96{
 	function __construct(){
 		$this->redirect_page = get_option('redirect69');
 		add_action( "wp_ajax_login_form96", array($this, 'login_form96'), 10 );
-		add_action( "wp_ajax_nopriv_login_form96", array($this, 'registration'), 10 );
+		add_action( "wp_ajax_nopriv_login_form96", array($this, 'login_form96'), 10 );
 
 		add_action( "wp_ajax_register_form96", array($this, 'register_form96'), 10 );
 		add_action( "wp_ajax_nopriv_register_form96", array($this, 'register_form96'), 10 );
@@ -21,14 +21,14 @@ class ajax_96{
         $err['status'] = false;
     } 
     else {
-        $username_email = user_system_test_input($username_email);
+        $username_email = $this->user_system_test_input($username_email);
         // check if e-mail address is well-formed
         if (!filter_var($username_email, FILTER_VALIDATE_EMAIL)) {
             // it's not a email
-            $userlogin_emailStatus = true;
-        } else {
-            // it's not a login
             $userlogin_emailStatus = false;
+        } else {
+            // it's a login
+            $userlogin_emailStatus = true;
         }
     }
 
@@ -38,7 +38,7 @@ class ajax_96{
         $err['error']  = $passwordErr;
         $err['status'] = false;
     } else {
-        $user_password = user_system_test_input($user_password);
+        $user_password = $this->user_system_test_input($user_password);
     }
 
     //REMEMBER ME
@@ -47,7 +47,7 @@ class ajax_96{
     } else {
         $remember_me = false;
     }
-    if ($userlogin_emailStatus == true) {
+    if ($userlogin_emailStatus == false) {
         $get_user = get_user_by('login', $username_email);
     } else {
         $get_user = get_user_by('email', $username_email);
@@ -134,7 +134,7 @@ class ajax_96{
 		            'user_login' => $username,
 		            'user_pass' => $upass, // When creating a new user, `user_pass` is expected.
 		            'user_email' => $email,
-		            'role' => 'josh-user'
+		            'role' => 'subscriber'
 		        );
             }
             
@@ -163,6 +163,12 @@ class ajax_96{
 		header('Content-Type: application/json');
 	    echo json_encode($data);
 	    wp_die();
+	}
+	function user_system_test_input($data){
+		$data = trim($data);
+	    $data = stripslashes($data);
+	    $data = htmlspecialchars($data);
+	    return $data;
 	}
 }
 new ajax_96();
