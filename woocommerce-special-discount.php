@@ -1,12 +1,12 @@
 <?php
 /**
-* @package w_a_p_l
+* @package woocommerce_special_discount
 * @version 1.0
 */
 /*
-Plugin Name: Login Register 96
+Plugin Name: Woocommerce Special Discount
 Plugin URI: #
-Description: Custom Login Register
+Description: 
 Version: 1.0
 License:     GPL2
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -27,11 +27,9 @@ along with Woocommerce Advanced plugin layout; if not, write to the Free Softwar
 Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
-define('CHI_PATH', dirname(__FILE__));
+define('WC_SPECIAL_DISCOUNT_PATH', dirname(__FILE__));
 $plugin = plugin_basename(__FILE__);
-define('CHI_URL', plugin_dir_url($plugin));
+define('WC_SPECIAL_DISCOUNT_URL', plugin_dir_url($plugin));
 
-require CHI_PATH.'/inc/LoginRegister96.php';
-require CHI_PATH.'/inc/login_register_menu.php';
-require CHI_PATH.'/inc/CHI_ajax.php';
+require(WC_SPECIAL_DISCOUNT_PATH.'/inc/special-discount-class.php');
 
