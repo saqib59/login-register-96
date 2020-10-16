@@ -1,10 +1,6 @@
 <?php
 // ini_set('max_execution_time', 0);
-
 class SpecialDiscountMain{
-
-    public $loginregister96_login = array();
-    public $loginregister96_register = array();
 
     function __construct(){
         add_action( 'wp_enqueue_scripts', array($this , 'login_register96_scripts') );
@@ -34,7 +30,6 @@ class SpecialDiscountMain{
 
              foreach ($all_categories as $cat) {
                $checked ='';
-                if($cat->category_parent == 0) {
                     $category_id = $cat->term_id;
                     if (is_array($discountedCategories) && count($discountedCategories)>0 && !empty($discountedCategories)) {
                       foreach ($discountedCategories as $key => $catId) {
@@ -44,7 +39,6 @@ class SpecialDiscountMain{
                       }
                   }
                  
-                }
                   $categories_array[$index] ='<option value="'.$cat->cat_ID.'" '.$checked.' > '.$cat->name. '</option>';
                   $index++;
               } 

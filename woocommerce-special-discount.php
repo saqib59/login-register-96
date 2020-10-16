@@ -30,17 +30,15 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 } // Exit if accessed directly
 
-
-if( ! function_exists( 'wc_special_discount_constructor' ) ) {
+/*if( ! function_exists( 'wc_special_discount_constructor' ) ) {
 	function wc_special_discount_constructor() {
 
-		require(WC_SPECIAL_DISCOUNT_PATH.'/inc/special-discount-class.php');
         // Let's start the game!
     }
 }
 
 
-add_action( 'wc_special_discount_init', 'wc_special_discount_constructor' );
+add_action( 'wc_special_discount_init', 'wc_special_discount_constructor' );*/
 
 if( ! function_exists( 'wc_special_discount_install' ) ) {
     function wc_special_discount_install() {
@@ -54,7 +52,7 @@ if( ! function_exists( 'wc_special_discount_install' ) ) {
         }
        
         else {
-            do_action( 'wc_special_discount_init' );
+				require(WC_SPECIAL_DISCOUNT_PATH.'/inc/special-discount-class.php');
         }
     }
 }
