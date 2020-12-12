@@ -1,4 +1,9 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
+
+require_once(CHI_PATH.'/inc/LoginRegister96.php');
+
+// include CHI_PATH.'/inc/';
 do_action( 'lms_scripts'); 
 if (!empty($_POST)) {
   if (isset($_POST['save_login'])) {
@@ -18,8 +23,15 @@ if (!empty($_POST)) {
 
       echo '<div class="notice notice-success is-dismissible"><p>Record updated!</p></div>';  
   }
+  if (isset($_POST['save_pages'])) {
+    
+      $hide_logout = (isset($_POST['hide_logout']) )? implode(",",$_POST['hide_logout']) : '';
+      $hide_login = (isset($_POST['hide_login']) )? implode(",",$_POST['hide_login']) : '';
+      update_option('hide_logout96', $hide_logout);
+      update_option('hide_login96', $hide_login);
+      echo '<div class="notice notice-success is-dismissible"><p>Record updated!</p></div>';  
+  }
 
-	
 }
 ?>
 
@@ -78,12 +90,6 @@ if (!empty($_POST)) {
     </div>
   </div>
 </form>
-
-
-
-
-
-
   </div>
 </div>
   </div>
@@ -139,16 +145,73 @@ if (!empty($_POST)) {
 </form>
 
 
-
-
-
-
   </div>
 </div>
   </div>
+
+   <div class="col-sm-6">
+
+<div class="card">
+  <div class="card-header">
+  <h3>Restrict Pages</h3>
+  <p>Write field names and form id of your login form</p>
+  </div>
+  <div class="card-body">
+<form accept="" method="POST">
+  <div class="form-group row">
+    <label for="redirect69" class="col-sm-2 col-form-label">Hide when logged in</label>
+    <div class="col-sm-10">
+      <select class="form-control" id="hide_login" name="hide_login[]" multiple="">
+        <option value="0">Select Page(s)</option>
+        <?php
+        $pages = get_pages();
+        foreach ($pages as $page) {
+         ?>
+         <option value="<?= $page->post_name;?>" <?= LoginRegister96::hidden_pages_on_log_in($page->post_name); ?>> <?= $page->post_title; ?></option>
+         <?php
+        }
+        ?>
+      </select>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="hide_logout" class="col-sm-2 col-form-label">Hide when logged out</label>
+    <div class="col-sm-10">
+      <select class="form-control" id="hide_logout" name="hide_logout[]" multiple="">
+        <option value="0">Select Page(s)</option>
+        <?php
+        $pages = get_pages();
+        foreach ($pages as $page) {
+         ?>
+         <option value="<?= $page->post_name;?>" <?= LoginRegister96::hidden_pages_on_log_out($page->post_name); ?>> <?= $page->post_title; ?></option>
+         <?php
+        }
+        ?>
+      </select>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label for="update_login96" class="col-sm-2 col-form-label"></label>
+    <div class="col-sm-10">
+      <button type="submit" id="update_login96" name="save_pages" class="btn btn-primary">Update</button>
+    </div>
+  </div>
+</form>
+  </div>
+</div>
+  </div>
+
 </div>
 <script type="text/javascript">
-  
+  jQuery("#hide_login").select2({
+placeholder: "eg: login-register, ",
+allowClear: true
+});
+   jQuery("#hide_logout").select2({
+placeholder: "eg: profile page ,dashboard",
+allowClear: true
+});
 </script>
 
 

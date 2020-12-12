@@ -53,7 +53,7 @@ class ajax_96{
         $get_user = get_user_by('email', $username_email);
     }
     $user_role = $get_user->roles[0];
-    if ($user_role == 'subscriber') {
+    if ($user_role == 'subscriber' || $user_role == 'customer') {
 
         //$get_user = get_user_by( 'email', $shears_email );
         if ($get_user != false) {
