@@ -42,34 +42,49 @@ class LoginRegister96{
           }
       public static function hidden_pages_on_log_in($page_slug){
            $hidden_when_login =  explode(",",get_option('hide_login96'));
-           if (in_array($page_slug, $hidden_when_login)){
-              return "selected";
-          }
+           if (!empty($hidden_when_login)) {
+               if (in_array($page_slug, $hidden_when_login)){
+                  return "selected";
+              }
+           }
+
       }
       public static function hidden_pages_on_log_out($page_slug){
            $hidden_when_login =  explode(",",get_option('hide_logout96'));
-           if (in_array($page_slug, $hidden_when_login)){
+           if (!empty($hidden_when_login)) {
+            if (in_array($page_slug, $hidden_when_login)){
               return "selected";
           }
+        }
       }
       public function redirect_home_if_log_out(){
             $current_user_id = get_current_user_id();
+            $hide_logout96 =  get_option('hide_logout96');
+            if ($hide_logout96) {
             $pages =  explode(",",get_option('hide_logout96'));
+            if (!empty($pages)) {
                 foreach ($pages as $index => $page_slug) {
                 if (is_page($pages[$index]) && $current_user_id == 0) {
                     wp_redirect(home_url());
                 }
             }
+          }
+        }
         }
 
         public function redirect_home_if_log_in(){
-           $current_user_id = get_current_user_id();;
+           $current_user_id = get_current_user_id();
+           $hide_login96 = get_option('hide_login96');
+           if ($hide_login96) {
            $pages =  explode(",",get_option('hide_login96'));
+           if (!empty($pages)) {
                 foreach ($pages as $index => $page_slug) {
                 if (is_page($pages[$index]) && $current_user_id != 0) {
                     wp_redirect(home_url());
                 }
             }
+          }
+        }
         }
 
 }
